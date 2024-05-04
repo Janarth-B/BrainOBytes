@@ -9,7 +9,8 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #4CAF50;
-            background-image: url('bg3.jpg');
+            background: url('bgpixa.gif');
+            /* Updated background image */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -25,6 +26,7 @@
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         h1 {
@@ -35,25 +37,43 @@
             margin-bottom: 20px;
         }
         
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+        }
+        
         .image-option {
-            margin-bottom: 10px;
-            display: inline-block;
-            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            width: calc(50% - 5px);
+            /* 2 columns with 10px gap */
         }
         
         .image-option img {
-            width: 50px;
-            height: 50px;
+            width: 100%;
+            /* Ensure the image fills its container */
+            height: auto;
             border-radius: 5px;
-            cursor: pointer;
+            transition: transform 0.3s ease;
         }
         
-        .image-option.selected {
+        .image-option:hover img {
+            transform: scale(1.05);
+            /* Scale up image on hover */
+        }
+        
+        .image-option.selected img {
             border: 2px solid #c3e6cb;
             /* Light green */
         }
         
-        .image-option.wrong {
+        .image-option.wrong img {
             border: 2px solid #f5c6cb;
             /* Light red */
         }
@@ -82,12 +102,41 @@
             font-size: 20px;
             margin-bottom: 20px;
         }
-        /* Container for buttons */
         
         .button-container {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+        }
+        
+        .spotlight {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            top: 0;
+            left: 0;
+            animation: spotlight-animation 2s forwards;
+        }
+        
+        .spotlight.green {
+            background-color: rgba(0, 255, 0, 0.7);
+        }
+        
+        .spotlight.red {
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+        
+        @keyframes spotlight-animation {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -98,61 +147,108 @@
         <div class="timer" id="timer">Time remaining: 15 seconds</div>
         <div class="question" id="question1">
             <p>Question 1: What is the capital of France?</p>
-            <div class="image-option" data-correct="paris">
-                <img src="paris.jpg" alt="Paris">
-            </div>
-            <div class="image-option">
-                <img src="berlin.jpg" alt="Berlin">
-            </div>
-            <div class="image-option">
-                <img src="rome.jpg" alt="Rome">
+            <div class="image-grid">
+                <div class="image-option" data-correct="paris">
+                    <img src="paris.jpg" alt="Paris">
+                </div>
+                <div class="image-option">
+                    <img src="berlin.jpg" alt="Berlin">
+                </div>
+                <div class="image-option">
+                    <img src="rome.jpg" alt="Rome">
+                </div>
+                <div class="image-option">
+                    <img src="twintower.jpg" alt="twintower">
+                </div>
             </div>
         </div>
+        <!-- More questions... -->
         <div class="question" id="question2" style="display: none;">
-            <p>Question 2: Which of the following is a type of fruit?</p>
-            <div class="image-option" data-correct="apple">
-                <img src="apple.jpg" alt="Apple">
-            </div>
-            <div class="image-option">
-                <img src="car.jpg" alt="Car">
-            </div>
-            <div class="image-option">
-                <img src="house.jpg" alt="House">
+            <p>Question 2: Which one of these is the most expensive painting?</p>
+            <div class="image-grid">
+                <div class="image-option" data-correct="monalisa">
+                    <img src="monalisa.jpg" alt="monalisa">
+                </div>
+                <div class="image-option">
+                    <img src="salvator.jpg" alt="salvator">
+                </div>
+                <div class="image-option">
+                    <img src="interchange.jpg" alt="interchange">
+                </div>
+                <div class="image-option">
+                    <img src="lastsupper.jpg" alt="lastsupper">
+                </div>
             </div>
         </div>
         <div class="question" id="question3" style="display: none;">
             <p>Question 3: What is the symbol of Japan?</p>
-            <div class="image-option" data-correct="rising-sun">
-                <img src="rising-sun.jpg" alt="Rising Sun">
+            <div class="image-grid">
+                <div class="image-option" data-correct="rising-sun">
+                    <img src="rising-sun.jpg" alt="Rising Sun">
+                </div>
+                <div class="image-option">
+                    <img src="dragon.jpg" alt="Dragon">
+                </div>
+                <div class="image-option">
+                    <img src="japview.jpg" alt="japview">
+                </div>
+                <div class="image-option">
+                    <img src="cherry-blossom.jpg" alt="Cherry Blossom">
+                </div>
             </div>
-            <div class="image-option">
-                <img src="dragon.jpg" alt="Dragon">
+        </div>
+        <div class="question" id="question4" style="display: none;">
+            <p>Question 4: Which is the smallest country in the world?</p>
+            <div class="image-grid">
+                <div class="image-option" data-correct="vatican">
+                    <img src="vatican.jpg" alt="vatican">
+                </div>
+                <div class="image-option">
+                    <img src="singapore.jpg" alt="singapore">
+                </div>
+                <div class="image-option">
+                    <img src="monaco.jpg" alt="monaco">
+                </div>
+                <div class="image-option">
+                    <img src="turkey.jpg" alt="turkey">
+                </div>
             </div>
-            <div class="image-option">
-                <img src="cherry-blossom.jpg" alt="Cherry Blossom">
+        </div>
+        <div class="question" id="question5" style="display: none;">
+            <p>Question 5: What is the National flag of Lebanon?</p>
+            <div class="image-grid">
+                <div class="image-option" data-correct="lebanon">
+                    <img src="lebanon.jpg" alt="lebanon">
+                </div>
+                <div class="image-option">
+                    <img src="kyrgyzstan.jpg" alt="kyrgyzstan">
+                </div>
+                <div class="image-option">
+                    <img src="bhutan.jpg" alt="bhutan">
+                </div>
+                <div class="image-option">
+                    <img src="randomflag.jpg" alt="randomflag">
+                </div>
             </div>
         </div>
         <div class="button-container">
-            <button type="button" id="prev-btn" style="display: none;">Previous</button>
-            <button type="button" id="next-btn" style="display: none;">Next</button>
-            <button type="button" id="skip-btn" style="display: none;">Skip</button>
+            <button type="button" id="prev-btn">Previous</button>
+            <button type="button" id="skip-btn">Skip</button>
+            <button type="button" id="next-btn">Next</button>
             <button type="button" id="submit-btn" style="display: none;">Submit</button>
         </div>
     </div>
 
     <script>
-        const container = document.querySelector('.container');
         const timerDisplay = document.getElementById('timer');
         const questions = document.querySelectorAll('.question');
         const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
         const skipBtn = document.getElementById('skip-btn');
+        const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
 
         let currentQuestionIndex = 0;
-        let startTime;
         let timeLeft = 15; // Initial time left in seconds
-        let timer;
 
         // Update timer display
         function updateTimerDisplay() {
@@ -225,25 +321,29 @@
                 nextBtn.disabled = true; // Disable next button until user selects an option
                 prevBtn.style.display = 'block'; // Show the previous button when skipping a question
             } else {
-                handleOptionSelection(); // Show result when all questions are answered
+                showResult(); // Show result when all questions are answered
             }
         }
 
         // Handle option selection
         function handleOptionSelection(event) {
             const selectedOption = event ? event.target.closest('.image-option') : null;
-            const correctOption = questions[currentQuestionIndex].querySelector('.option[data-correct]');
-            if (selectedOption && correctOption) {
+            const correctOption = questions[currentQuestionIndex].querySelector('.image-option[data-correct]');
+            if (selectedOption) {
                 if (selectedOption === correctOption) {
                     selectedOption.classList.add('selected');
+                    selectedOption.innerHTML += '<div class="spotlight green"></div>'; // Add green spotlight
                 } else {
                     selectedOption.classList.add('wrong');
-                    correctOption.classList.add('selected');
+                    selectedOption.innerHTML += '<div class="spotlight red"></div>'; // Add red spotlight
                 }
             }
             clearInterval(timer); // Stop timer after selecting an option
-            nextBtn.disabled = false; // Enable next button to proceed to the next question
-            prevBtn.disabled = true; // Disable previous button after selecting an option
+            if (currentQuestionIndex === questions.length - 1) {
+                showResult(); // Show result if it's the last question
+            } else {
+                setTimeout(showNextQuestion, 2000); // Move to next question after 2 seconds
+            }
         }
 
         // Calculate score and display result
@@ -252,7 +352,7 @@
             let totalIncorrect = 0;
             for (let i = 0; i < questions.length; i++) {
                 const selectedOption = questions[i].querySelector('.image-option.selected');
-                const correctOption = questions[i].querySelector('.option[data-correct]');
+                const correctOption = questions[i].querySelector('.image-option[data-correct]');
                 if (selectedOption && correctOption) {
                     if (selectedOption === correctOption) {
                         totalCorrect++;
@@ -271,14 +371,48 @@
                                     <p>No of Incorrect: ${totalIncorrect}</p>
                                     <p>Points Scored: ${totalPoints}</p>
                                 </div>`;
-            container.innerHTML = resultHTML;
+            document.querySelector('.container').innerHTML = resultHTML;
+
+            // Prepare quiz results data
+            const quizResults = {
+                quiz_name: "Image Answering Quiz",
+                duration: totalTime,
+                correct_answers: totalCorrect,
+                incorrect_answers: totalIncorrect,
+                points_scored: totalPoints
+            };
+
+            // Send quiz results data to the PHP script using AJAX
+            fetch('pixa.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(quizResults)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Quiz results stored successfully.');
+                        // Redirect or display a success message to the user
+                    } else {
+                        console.error('Failed to store quiz results.');
+                        // Handle error scenario
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle error scenario
+                });
         }
+
+        const startTime = new Date();
+        let timer = setInterval(countdown, 1000); // Start the timer when the quiz begins
 
         // Add event listeners
         prevBtn.addEventListener('click', showPrevQuestion);
         nextBtn.addEventListener('click', showNextQuestion);
         skipBtn.addEventListener('click', skipQuestion); // Adding event listener for skip button
-        submitBtn.addEventListener('click', showResult);
+
         // Adding event listener for image option click
         document.querySelectorAll('.image-option').forEach(imageOption => {
             imageOption.addEventListener('click', handleOptionSelection);
@@ -292,8 +426,7 @@
         // Display the next button for the first question
         nextBtn.style.display = 'block';
         skipBtn.style.display = 'block';
-        startTime = new Date();
-        timer = setInterval(countdown, 1000); // Start the timer when the quiz begins
+        updateTimerDisplay(); // Update timer display initially
     </script>
 </body>
 
