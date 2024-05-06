@@ -7,6 +7,22 @@ BrainOBytes Quiz is an engaging and interactive online quiz application designed
 # BrainOBytes Demo
 https://github.com/Janarth-B/BrainOBytes/assets/109870783/0edd122a-8f5a-4dc3-b748-ec3e0c93ff71
 
+# How To Run
+1. Open Xampp, run Apache And Mysql
+2. Go to php Myadmin Dashboard
+3. Create a Database Login and Table as Users
+4. Create a Database quizz_results Tables as pixa_questions, mcq_questions, tf_questions
+5. Make the Table values as users Required
+6. Make sure to save your source codes and required image and gif files in XAMPP > htdocs> Your Folder
+7. Go to Chrome or any browser and run the Project, for example My folder name is "login" so run as localhost/login/login.php
+
+
+
+
+
+
+
+
 
 
 
